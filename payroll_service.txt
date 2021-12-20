@@ -34,3 +34,10 @@ mysql> desc employee_payroll;
 | start_date | date         | YES  |     | NULL    |                |
 +------------+--------------+------+-----+---------+----------------+
 4 rows in set (0.02 sec)
+
+mysql>  insert into employee_payroll(name,salary,start_Date)
+    -> values('tenzing',300000,'2021-01-12'),
+    -> ('baburao',100000,'2020-03-01'),
+    -> ('joytimaya',300000,'2021-02-01');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
