@@ -279,3 +279,55 @@ mysql> desc payroll;
 | net_pay     | double      | YES  |     | NULL    |       |
 +-------------+-------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
+
+mysql> insert into employee values ('emp1','Tenzing','7018485591','M','2021-01-02',1,'CSE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values ('emp2','Methok','7018485591','F','2020-2-10',1,'ECE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values ('emp3','Dhugkar','1234567789','M','2021-9-02',1,'CSE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values ('emp4','Lhaze','2345645655','M','2021-9-02',3,'CSE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values ('emp5','Rani','9384545655','F','2002-9-02',2,'ECE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into department values('CSE','computer science'),('ECE','electronics');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select* from employee;
++--------+---------+--------------+--------+------------+------------+---------+
+| emp_id | name    | phone_number | gender | start      | company_id | dept_id |
++--------+---------+--------------+--------+------------+------------+---------+
+| emp1   | Tenzing | 7018485591   | M      | 2021-01-02 |          1 | CSE     |
+| emp2   | Methok  | 7018485591   | F      | 2020-02-10 |          1 | ECE     |
+| emp3   | Dhugkar | 1234567789   | M      | 2021-09-02 |          1 | CSE     |
+| emp4   | Lhaze   | 2345645655   | M      | 2021-09-02 |          2 | CSE     |
+| emp5   | Rani    | 9384545655   | F      | 2002-09-02 |          2 | ECE     |
++--------+---------+--------------+--------+------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select* from department;
++---------+------------------+
+| dept_id | dept_name        |
++---------+------------------+
+| CSE     | computer science |
+| ECE     | electronics      |
++---------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> select* from employee inner join department on employee.dept_id = department.dept_id;
++--------+---------+--------------+--------+------------+------------+---------+---------+------------------+
+| emp_id | name    | phone_number | gender | start      | company_id | dept_id | dept_id | dept_name        |
++--------+---------+--------------+--------+------------+------------+---------+---------+------------------+
+| emp1   | Tenzing | 7018485591   | M      | 2021-01-02 |          1 | CSE     | CSE     | computer science |
+| emp3   | Dhugkar | 1234567789   | M      | 2021-09-02 |          1 | CSE     | CSE     | computer science |
+| emp4   | Lhaze   | 2345645655   | M      | 2021-09-02 |          2 | CSE     | CSE     | computer science |
+| emp2   | Methok  | 7018485591   | F      | 2020-02-10 |          1 | ECE     | ECE     | electronics      |
+| emp5   | Rani    | 9384545655   | F      | 2002-09-02 |          2 | ECE     | ECE     | electronics      |
++--------+---------+--------------+--------+------------+------------+---------+---------+------------------+
+5 rows in set (0.00 sec)
