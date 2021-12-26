@@ -233,6 +233,10 @@ mysql> create table Employee(
     -> foreign key (company_id) references company(company_id));
 Query OK, 0 rows affected (0.12 sec)
 
+mysql> alter table  employee add dept_id varchar(10) after company_id;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
 mysql> alter table  employee add foreign key(dept_id) references department(dept_id);
 Query OK, 0 rows affected (0.16 sec)
 Records: 0  Duplicates: 0  Warnings: 0
