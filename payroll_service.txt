@@ -188,3 +188,90 @@ mysql> describe employee_payroll;
 | start_date  | date         | YES  |     | NULL    |                |
 +-------------+--------------+------+-----+---------+----------------+
 12 rows in set (0.04 sec)
+
+
+mysql> create table company(
+    -> company_id int unsigned auto_increment primary key,
+    -> company_name varchar(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc company;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| company_id   | int unsigned | NO   | PRI | NULL    | auto_increment |
+| company_name | varchar(50)  | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.04 sec)
+
+
+mysql> create table department(
+    -> dept_id varchar(10) not null,
+    -> dept_name varchar(50) not null);
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> alter table department add primary key(dept_id);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_id   | varchar(10) | NO   | PRI | NULL    |       |
+| dept_name | varchar(50) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table Employee(
+    -> emp_id varchar(10) not null primary key,
+    -> name varchar(30) not null,
+    -> phone_number varchar(20) not null,
+    -> gender char(1),
+    -> start date,
+    -> company_id int unsigned,
+    -> foreign key (company_id) references company(company_id));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> alter table  employee add foreign key(dept_id) references department(dept_id);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| emp_id       | varchar(10)  | NO   | PRI | NULL    |       |
+| name         | varchar(30)  | NO   |     | NULL    |       |
+| phone_number | varchar(20)  | NO   |     | NULL    |       |
+| gender       | char(1)      | YES  |     | NULL    |       |
+| start        | date         | YES  |     | NULL    |       |
+| company_id   | int unsigned | YES  | MUL | NULL    |       |
+| dept_id      | varchar(10)  | YES  | MUL | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create table payroll(
+    -> emp_id varchar(10) primary key,
+    -> basic_pay double,
+    -> deductions double,
+    -> taxable_pay double,
+    -> tax double,
+    -> net_pay double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> alter table  payroll add foreign key(emp_id) references employee(emp_id);
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc payroll;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| emp_id      | varchar(10) | NO   | PRI | NULL    |       |
+| basic_pay   | double      | YES  |     | NULL    |       |
+| deductions  | double      | YES  |     | NULL    |       |
+| taxable_pay | double      | YES  |     | NULL    |       |
+| tax         | double      | YES  |     | NULL    |       |
+| net_pay     | double      | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
